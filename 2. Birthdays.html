@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Birthdays</h1>
+        </div>
+
+        <!-- Create forms for users to submit their birthday, modify an existing birthday, or delete an existing birthday -->
+
+        <div class="container">
+
+            <!-- Adding a birthday -->
+            <!----------------------->
+
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+
+                {% block add %}
+
+                    <!-- Create a form and submit to '/' with a method of post. -->
+                    <form action="/" method="post">
+
+                        <!-- HTML form where users can type in a name, a birthday month, and a birthday day -->
+                        <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+                        <input autocomplete="off" autofocus name="month" placeholder="Month" type="text">
+                        <input autocomplete="off" autofocus name="day" placeholder="Day" type="text">
+
+                        <!-- Submit new birthday -->
+                        <input type="submit" value="Add Birthday">
+
+                    </form>
+
+                {% endblock %}
+
+            </div>
+
+            <!-- Modifying a birthday -->
+            <!-------------------------->
+
+            <div class="section">
+
+                <h2>Modify a Birthday</h2>
+
+                {% block modify %}
+
+                    <!-- Create a form and submit to '/' with a method of post. -->
+                    <form action="/" method="post">
+
+                        <!-- HTML form where users can type in an existing name, a birthday month to modify, and a birthday day to modify -->
+                        <input autocomplete="off" autofocus name="mod_name" placeholder="Name" type="text">
+                        <input autocomplete="off" autofocus name="mod_month" placeholder="Month" type="text">
+                        <input autocomplete="off" autofocus name="mod_day" placeholder="Day" type="text">
+
+                        <!-- Submit modification -->
+                        <input type="submit" value="Modify Birthday">
+
+                    </form>
+
+                {% endblock %}
+
+            </div>
+
+            <!-- Deleting a birthday -->
+            <!------------------------->
+
+            <div class="section">
+
+                <h2>Delete a Birthday</h2>
+
+                {% block delete %}
+
+                    <!-- Create a form and submit to '/' with a method of post. -->
+                    <form action="/" method="post">
+
+                        <!-- HTML form where users can type in the name of the person to delete -->
+                        <input autocomplete="off" autofocus name="delete_name" placeholder="Name" type="text">
+
+                        <!-- Submit deletion -->
+                        <input type="submit" value="Delete Birthday">
+
+                    </form>
+
+                {% endblock %}
+
+            </div>
+
+            <div class="section">
+
+                <!-- Display, in a table, all of the people in the database along with their birthdays. -->
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Loop through the database entries to display them in this table -->
+                        {% for birthday in birthdays %}
+
+                        <!-- For each birthday, render each birthday as a row in the table-->
+                        <tr>
+                                <!-- Each row should have two columns: the person’s name and the person’s birthday -->
+                                <td>{{ birthday.name }}</td>
+                                <td>{{ birthday.month }}/{{ birthday.day }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
